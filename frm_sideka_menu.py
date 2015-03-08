@@ -64,27 +64,62 @@ class sideka(wx.Frame):
               pos=wx.Point(435, 85), size=wx.Size(647, 616),
               style=wx.FRAME_NO_TASKBAR, title=u'SIDEKA')
         self.SetClientSize(wx.Size(647, 616))
+        
+         
+        # bagian atas tombol sinkron dan bantuan
+        self.garis_atas = wx.StaticLine(id=wxID_SIDEKAGARIS_ATAS,
+              name=u'garis_atas', parent=self, pos=wx.Point(16, 80),
+              size=wx.Size(616, 2), style=0)
 
+       self.staticText3 = wx.StaticText(id=wxID_SIDEKASTATICTEXT3,
+              label=u' SIDEKA ONLINE :', name='staticText3', parent=self,
+              pos=wx.Point(304, 16), size=wx.Size(112, 17), style=0)
+
+                      self.tombol_sinkron = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/sinkron.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_SINKRON,
+              label=u'Sinkron Data', name=u'tombol_sinkron', parent=self,
+              pos=wx.Point(296, 40), size=wx.Size(168, 32), style=0)
+
+        self.tombol_bantuan = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/bantuan.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_BANTUAN,
+              label=u'  Bantuan', name=u'tombol_bantuan', parent=self,
+              pos=wx.Point(472, 40), size=wx.Size(168, 32), style=0)
+        self.tombol_bantuan.Bind(wx.EVT_BUTTON, self.OnTombol_bantuanButton,
+              id=wxID_SIDEKATOMBOL_BANTUAN)
+
+       #kotak menu utama
         self.kotak_menu_utama = wx.StaticBox(id=wxID_SIDEKAKOTAK_MENU_UTAMA,
               label=u'MENU UTAMA', name=u'kotak_menu_utama', parent=self,
               pos=wx.Point(16, 88), size=wx.Size(200, 235), style=0)
 
-        self.kota_penduduk = wx.StaticBox(id=wxID_SIDEKAKOTA_PENDUDUK,
-              label=u'PENDUDUK', name=u'kota_penduduk', parent=self,
+       self.tombol_password = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/security1.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_PASSWORD,
+              label=u'  Password', name=u'tombol_password', parent=self,
+              pos=wx.Point(32, 112), size=wx.Size(168, 32), style=0)
+
+        self.profil_desa = wx.StaticText(id=wxID_SIDEKASTATICTEXT4,
+              label=u'PROFIL DESA', name='profil_desa', parent=self,
+              pos=wx.Point(72, 168), size=wx.Size(84, 17), style=0)
+
+        self.tombol_laporan_profil = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/laporan.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_LAPORAN_PROFIL,
+              label=u' Laporan Profil', name=u'tombol_laporan_profil',
+              parent=self, pos=wx.Point(32, 272), size=wx.Size(168, 32),
+              style=0)
+        self.tombol_laporan_profil.Bind(wx.EVT_BUTTON,
+              self.OnTombol_laporan_profilButton,
+              id=wxID_SIDEKATOMBOL_LAPORAN_PROFIL)
+
+        
+        self.garis_dalam = wx.StaticLine(id=wxID_SIDEKASTATICLINE2,
+              name='garis_dalam', parent=self, pos=wx.Point(24, 152),
+              size=wx.Size(184, 2), style=0)
+
+        # Kotak menu penduduk
+        self.kotak_penduduk = wx.StaticBox(id=wxID_SIDEKAKOTA_PENDUDUK,
+              label=u'PENDUDUK', name=u'kotak_penduduk', parent=self,
               pos=wx.Point(224, 88), size=wx.Size(200, 235), style=0)
-
-        self.kotak_kemiskinan = wx.StaticBox(id=wxID_SIDEKAKOTAK_KEMISKINAN,
-              label=u'KEMISKINAN', name=u'kotak_kemiskinan', parent=self,
-              pos=wx.Point(432, 88), size=wx.Size(200, 235), style=0)
-
-        self.kotak_administrasi = wx.StaticBox(id=wxID_SIDEKAKOTAK_ADMINISTRASI,
-              label=u'ADMINISTRASI', name=u'kotak_administrasi', parent=self,
-              pos=wx.Point(16, 328), size=wx.Size(200, 235), style=0)
-
-        self.kotak_potensi = wx.StaticBox(id=wxID_SIDEKAKOTAK_POTENSI,
-              label=u'POTENSI DESA', name=u'kotak_potensi', parent=self,
-              pos=wx.Point(224, 328), size=wx.Size(200, 235), style=0)
-
+        
         self.tombol_kependudukan = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/plus14.png',
               wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_KEPENDUDUKAN,
               label=u'  Kependudukan', name=u'tombol_kependudukan', parent=self,
@@ -129,6 +164,11 @@ class sideka(wx.Frame):
               self.OnTombol_laporan_pendudukButton,
               id=wxID_SIDEKATOMBOL_LAPORAN_PENDUDUK)
 
+        #kotak menu kemiskinan
+        self.kotak_kemiskinan = wx.StaticBox(id=wxID_SIDEKAKOTAK_KEMISKINAN,
+              label=u'KEMISKINAN', name=u'kotak_kemiskinan', parent=self,
+              pos=wx.Point(432, 88), size=wx.Size(200, 235), style=0)
+
         self.tombol_tambah_data_kemiskinan = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/plus14.png',
               wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_TAMBAH_DATA_KEMISKINAN,
               label=u'  Tambah Data', name=u'tombol_tambah_data_kemiskinan',
@@ -146,42 +186,6 @@ class sideka(wx.Frame):
         self.tomobol_indikator_kemiskinan.Bind(wx.EVT_BUTTON,
               self.OnTomobol_indikator_kemiskinanButton,
               id=wxID_SIDEKATOMOBOL_INDIKATOR_KEMISKINAN)
-
-        self.kotak_statistik = wx.StaticBox(id=wxID_SIDEKAKOTAK_STATISTIK,
-              label=u'STATISTIK', name=u'kotak_statistik', parent=self,
-              pos=wx.Point(432, 328), size=wx.Size(200, 235), style=0)
-
-        self.tombol_input_profil = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/plus14.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_INPUT_PROFIL,
-              label=u'  Input Profil', name=u'tombol_input_profil', parent=self,
-              pos=wx.Point(32, 192), size=wx.Size(168, 32), style=0)
-        self.tombol_input_profil.Bind(wx.EVT_BUTTON,
-              self.OnTombol_input_profilButton,
-              id=wxID_SIDEKATOMBOL_INPUT_PROFIL)
-
-        self.tombol_edit_profil = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/edit.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_EDIT_PROFIL,
-              label=u'  Edit Profil', name=u'tombol_edit_profil', parent=self,
-              pos=wx.Point(32, 232), size=wx.Size(168, 32), style=0)
-        self.tombol_edit_profil.Bind(wx.EVT_BUTTON,
-              self.OnTombol_edit_profilButton,
-              id=wxID_SIDEKATOMBOL_EDIT_PROFIL)
-
-        self.tombol_sinkron = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/sinkron.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_SINKRON,
-              label=u'Sinkron Data', name=u'tombol_sinkron', parent=self,
-              pos=wx.Point(296, 40), size=wx.Size(168, 32), style=0)
-
-        self.tombol_bantuan = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/bantuan.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_BANTUAN,
-              label=u'  Bantuan', name=u'tombol_bantuan', parent=self,
-              pos=wx.Point(472, 40), size=wx.Size(168, 32), style=0)
-        self.tombol_bantuan.Bind(wx.EVT_BUTTON, self.OnTombol_bantuanButton,
-              id=wxID_SIDEKATOMBOL_BANTUAN)
-
-        self.garis_atas = wx.StaticLine(id=wxID_SIDEKAGARIS_ATAS,
-              name=u'garis_atas', parent=self, pos=wx.Point(16, 80),
-              size=wx.Size(616, 2), style=0)
 
         self.tombol_edit_data_kemiskinan = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/edit.png',
               wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_EDIT_DATA_KEMISKINAN,
@@ -209,6 +213,11 @@ class sideka(wx.Frame):
         self.tombol_laporan_kemiskinan.Bind(wx.EVT_BUTTON,
               self.OnTombol_laporan_kemiskinanButton,
               id=wxID_SIDEKATOMBOL_LAPORAN_KEMISKINAN)
+
+        #kotak administrasi surat desa
+        self.kotak_administrasi = wx.StaticBox(id=wxID_SIDEKAKOTAK_ADMINISTRASI,
+              label=u'ADMINISTRASI', name=u'kotak_administrasi', parent=self,
+              pos=wx.Point(16, 328), size=wx.Size(200, 235), style=0)
 
         self.tombol_surat_masuk = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/plus14.png',
               wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_SURAT_MASUK,
@@ -253,27 +262,10 @@ class sideka(wx.Frame):
               self.OnTombol_laporan_administrasiButton,
               id=wxID_SIDEKATOMBOL_LAPORAN_ADMINISTRASI)
 
-        self.staticText3 = wx.StaticText(id=wxID_SIDEKASTATICTEXT3,
-              label=u' SIDEKA ONLINE :', name='staticText3', parent=self,
-              pos=wx.Point(304, 16), size=wx.Size(112, 17), style=0)
-
-        self.tombol_password = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/security1.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_PASSWORD,
-              label=u'  Password', name=u'tombol_password', parent=self,
-              pos=wx.Point(32, 112), size=wx.Size(168, 32), style=0)
-
-        self.staticText4 = wx.StaticText(id=wxID_SIDEKASTATICTEXT4,
-              label=u'PROFIL DESA', name='staticText4', parent=self,
-              pos=wx.Point(72, 168), size=wx.Size(84, 17), style=0)
-
-        self.tombol_laporan_profil = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/laporan.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_LAPORAN_PROFIL,
-              label=u' Laporan Profil', name=u'tombol_laporan_profil',
-              parent=self, pos=wx.Point(32, 272), size=wx.Size(168, 32),
-              style=0)
-        self.tombol_laporan_profil.Bind(wx.EVT_BUTTON,
-              self.OnTombol_laporan_profilButton,
-              id=wxID_SIDEKATOMBOL_LAPORAN_PROFIL)
+        #kotak menu potensi desa
+        self.kotak_potensi = wx.StaticBox(id=wxID_SIDEKAKOTAK_POTENSI,
+              label=u'POTENSI DESA', name=u'kotak_potensi', parent=self,
+              pos=wx.Point(224, 328), size=wx.Size(200, 235), style=0)
 
         self.tombol_ekonomi = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/bantuan.png',
               wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_EKONOMI,
@@ -282,26 +274,40 @@ class sideka(wx.Frame):
         self.tombol_ekonomi.Bind(wx.EVT_BUTTON, self.OnTombol_ekonomiButton,
               id=wxID_SIDEKATOMBOL_EKONOMI)
 
-        self.staticLine2 = wx.StaticLine(id=wxID_SIDEKASTATICLINE2,
-              name='staticLine2', parent=self, pos=wx.Point(24, 152),
-              size=wx.Size(184, 2), style=0)
+        self.tombol_lahan = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/lahan.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_LAHAN,
+              label=u' Lahan & Sumber Air', name=u'tombol_lahan', parent=self,
+              pos=wx.Point(240, 392), size=wx.Size(168, 31), style=0)
+        self.tombol_lahan.Bind(wx.EVT_BUTTON, self.OnTombol_lahanButton,
+              id=wxID_SIDEKATOMBOL_LAHAN)
 
-        self.staticText5 = wx.StaticText(id=wxID_SIDEKASTATICTEXT5,
-              label=u'Prakarsa Desa 2015', name='staticText5', parent=self,
-              pos=wx.Point(504, 592), size=wx.Size(130, 17), style=0)
+        self.tombol_tambak = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/tambak.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_TAMBAK,
+              label=u' Tambak / Kolam Ikan', name=u'tombol_tambak', parent=self,
+              pos=wx.Point(240, 432), size=wx.Size(168, 31), style=0)
+        self.tombol_tambak.Bind(wx.EVT_BUTTON, self.OnTombol_tambakButton,
+              id=wxID_SIDEKATOMBOL_TAMBAK)
 
-        self.tombol_keluar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/delete25.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_KELUAR,
-              label=u'  Keluar Dari Program SIDEKA', name=u'tombol_keluar',
-              parent=self, pos=wx.Point(208, 576), size=wx.Size(240, 31),
+        self.tombol_pariwisata = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/pariwisata.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_PARIWISATA,
+              label=u' Pariwisata', name=u'tombol_pariwisata', parent=self,
+              pos=wx.Point(240, 472), size=wx.Size(168, 31), style=0)
+        self.tombol_pariwisata.Bind(wx.EVT_BUTTON,
+              self.OnTombol_pariwisataButton, id=wxID_SIDEKATOMBOL_PARIWISATA)
+
+        self.tombol_laporan_potensi = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/laporan.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_LAPORAN_POTENSI,
+              label=u' Laporan Potensi', name=u'tombol_laporan_potensi',
+              parent=self, pos=wx.Point(240, 512), size=wx.Size(168, 31),
               style=0)
-        self.tombol_keluar.Bind(wx.EVT_BUTTON, self.OnTombol_keluarButton,
-              id=wxID_SIDEKATOMBOL_KELUAR)
+        self.tombol_laporan_potensi.Bind(wx.EVT_BUTTON,
+              self.OnTombol_laporan_potensiButton,
+              id=wxID_SIDEKATOMBOL_LAPORAN_POTENSI)
 
-        self.gambar_logo = wx.StaticBitmap(bitmap=wx.Bitmap('png/sideka.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKAGAMBAR_LOGO,
-              name=u'gambar_logo', parent=self, pos=wx.Point(16, 8),
-              size=wx.Size(272, 64), style=0)
+        #kotak menu statistik
+        self.kotak_statistik = wx.StaticBox(id=wxID_SIDEKAKOTAK_STATISTIK,
+              label=u'STATISTIK', name=u'kotak_statistik', parent=self,
+              pos=wx.Point(432, 328), size=wx.Size(200, 235), style=0)
 
         self.tombol_statistik_penduduk = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/pen.png',
               wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_STATISTIK_PENDUDUK,
@@ -347,36 +353,44 @@ class sideka(wx.Frame):
               self.OnTombol_laporan_statistikButton,
               id=wxID_SIDEKATOMBOL_LAPORAN_STATISTIK)
 
-        self.tombol_lahan = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/lahan.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_LAHAN,
-              label=u' Lahan & Sumber Air', name=u'tombol_lahan', parent=self,
-              pos=wx.Point(240, 392), size=wx.Size(168, 31), style=0)
-        self.tombol_lahan.Bind(wx.EVT_BUTTON, self.OnTombol_lahanButton,
-              id=wxID_SIDEKATOMBOL_LAHAN)
+        
+        self.tombol_input_profil = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/plus14.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_INPUT_PROFIL,
+              label=u'  Input Profil', name=u'tombol_input_profil', parent=self,
+              pos=wx.Point(32, 192), size=wx.Size(168, 32), style=0)
+        self.tombol_input_profil.Bind(wx.EVT_BUTTON,
+              self.OnTombol_input_profilButton,
+              id=wxID_SIDEKATOMBOL_INPUT_PROFIL)
 
-        self.tombol_tambak = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/tambak.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_TAMBAK,
-              label=u' Tambak / Kolam Ikan', name=u'tombol_tambak', parent=self,
-              pos=wx.Point(240, 432), size=wx.Size(168, 31), style=0)
-        self.tombol_tambak.Bind(wx.EVT_BUTTON, self.OnTombol_tambakButton,
-              id=wxID_SIDEKATOMBOL_TAMBAK)
+        self.tombol_edit_profil = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/edit.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_EDIT_PROFIL,
+              label=u'  Edit Profil', name=u'tombol_edit_profil', parent=self,
+              pos=wx.Point(32, 232), size=wx.Size(168, 32), style=0)
+        self.tombol_edit_profil.Bind(wx.EVT_BUTTON,
+              self.OnTombol_edit_profilButton,
+              id=wxID_SIDEKATOMBOL_EDIT_PROFIL)
 
-        self.tombol_pariwisata = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/pariwisata.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_PARIWISATA,
-              label=u' Pariwisata', name=u'tombol_pariwisata', parent=self,
-              pos=wx.Point(240, 472), size=wx.Size(168, 31), style=0)
-        self.tombol_pariwisata.Bind(wx.EVT_BUTTON,
-              self.OnTombol_pariwisataButton, id=wxID_SIDEKATOMBOL_PARIWISATA)
+        
+        
+        self.staticText5 = wx.StaticText(id=wxID_SIDEKASTATICTEXT5,
+              label=u'Prakarsa Desa 2015', name='staticText5', parent=self,
+              pos=wx.Point(504, 592), size=wx.Size(130, 17), style=0)
 
-        self.tombol_laporan_potensi = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/laporan.png',
-              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_LAPORAN_POTENSI,
-              label=u' Laporan Potensi', name=u'tombol_laporan_potensi',
-              parent=self, pos=wx.Point(240, 512), size=wx.Size(168, 31),
+        self.tombol_keluar = wx.lib.buttons.GenBitmapTextButton(bitmap=wx.Bitmap('png/delete25.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKATOMBOL_KELUAR,
+              label=u'  Keluar Dari Program SIDEKA', name=u'tombol_keluar',
+              parent=self, pos=wx.Point(208, 576), size=wx.Size(240, 31),
               style=0)
-        self.tombol_laporan_potensi.Bind(wx.EVT_BUTTON,
-              self.OnTombol_laporan_potensiButton,
-              id=wxID_SIDEKATOMBOL_LAPORAN_POTENSI)
+        self.tombol_keluar.Bind(wx.EVT_BUTTON, self.OnTombol_keluarButton,
+              id=wxID_SIDEKATOMBOL_KELUAR)
 
+        self.gambar_logo = wx.StaticBitmap(bitmap=wx.Bitmap('png/sideka.png',
+              wx.BITMAP_TYPE_PNG), id=wxID_SIDEKAGAMBAR_LOGO,
+              name=u'gambar_logo', parent=self, pos=wx.Point(16, 8),
+              size=wx.Size(272, 64), style=0)
+
+        
+        
     def __init__(self, parent):
                 self._init_ctrls(parent)
     
