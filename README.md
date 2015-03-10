@@ -10,5 +10,5 @@ dengan database secara online.
 Dengan penggunaan SIDEKA DESKTOP kebutuhan akan akses internet dapat diperkecil karena
 yang dilakukan hanyalah pengiriman database sedangkan Layanan Front End berada di desktop.
 
-Penggunaan Pyrhon ( wxPython ) bertujuan agar proses program berjalan tanpa menggunakan 
-resource yang besar sesaui dengan kondisi resource komputer yang berada di pedesaan.
+Penggunaan Python (wxPython) bertujuan agar proses program berjalan tanpa menggunakan 
+resource yang besar sesuai dengan kondisi resource komputer yang berada di pedesaan.
